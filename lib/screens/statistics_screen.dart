@@ -107,11 +107,31 @@ class EstadisticasScreen extends StatelessWidget {
                         backgroundImage: AssetImage(sistema['imagen']!),
                       ),
                       title: Text(sistema['nombre']!),
-                      subtitle: Text(
-                        sistema['estado']!,
-                        style: TextStyle(
-                          color: isCritico ? Colors.red : Colors.green,
-                          fontWeight: FontWeight.bold,
+                      subtitle: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: isCritico
+                                ? Colors.yellow[100]
+                                : Colors.green[100],
+                            border: Border.all(
+                              color: isCritico
+                                  ? Colors.yellow[700]!
+                                  : Colors.green[700]!,
+                            ),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(
+                            sistema['estado']!,
+                            style: TextStyle(
+                              color: isCritico
+                                  ? Colors.yellow[800]
+                                  : Colors.green[900],
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
                         ),
                       ),
                       trailing: Icon(Icons.arrow_forward_ios),

@@ -133,7 +133,7 @@ class DetailsStatistics extends StatelessWidget {
                   children: [
                     _buildTemperatura(),
                     _buildHumedad(),
-                    Center(child: Text("Datos de consumo")),
+                    _buildConsumo(),
                   ],
                 ),
               ),
@@ -245,6 +245,57 @@ class DetailsStatistics extends StatelessWidget {
             child: Column(
               children: [
                 Text("Humedad interna", style: TextStyle(fontSize: 14)),
+                SizedBox(height: 200, child: _buildLineChart()),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildConsumo() {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(children: const [
+                    Text("Valor promedio",
+                        style: TextStyle(color: Colors.grey)),
+                    Text("80 %",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20)),
+                  ]),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(children: const [
+                    Text("Mínimo", style: TextStyle(color: Colors.grey)),
+                    Text("80 W"),
+                    SizedBox(height: 8),
+                    Text("Máximo", style: TextStyle(color: Colors.grey)),
+                    Text("180 W"),
+                  ]),
+                ),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: 20),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                Text("Consumo", style: TextStyle(fontSize: 14)),
                 SizedBox(height: 200, child: _buildLineChart()),
               ],
             ),
