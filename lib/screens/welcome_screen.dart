@@ -45,7 +45,7 @@ class WelcomeScreen extends StatelessWidget {
 
               ElevatedButton(
                 onPressed: (){
-                  // TODO: Navegar a la pantalla de registro (Navigator.pushNamed(context, '/register'));
+                  Navigator.pushNamed(context, '/register');
                 },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(
@@ -86,7 +86,7 @@ class WelcomeScreen extends StatelessWidget {
 
               ElevatedButton(
                 onPressed: (){
-                  // TODO: Navegar a la pantalla de login (Navigator.pushNamed(context, 'login'));
+                  Navigator.pushNamed(context, '/login');
                 },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(
