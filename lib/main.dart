@@ -18,8 +18,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/welcome',
       routes: {
         '/welcome': (context) => const WelcomeScreen(),
-        '/register': (context) => const RegisterScreen(),
-        '/login': (context) => const LoginScreen()
+        '/register': (context) => RegisterScreen(),
+        '/login': (context) => LoginScreen()
       },
       title: 'AXO',
     );
