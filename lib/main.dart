@@ -1,3 +1,4 @@
+import 'package:axo_app/screens/layout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:axo_app/screens/login_screen.dart';
 import 'package:axo_app/screens/register_screen.dart';
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/welcome': (context) => const WelcomeScreen(),
         '/register': (context) => RegisterScreen(),
-        '/login': (context) => LoginScreen()
+        '/login': (context) => LoginScreen(),
+        '/layout': (context) => const LayoutScreen(),
       },
       title: 'AXO',
     );

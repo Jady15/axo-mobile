@@ -28,60 +28,19 @@ class EstadisticasScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFF0A4C92), // Azul oscuro de fondo
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        title: Row(
-          children: [
-            Image.asset(
-              'assets/axo-logo.png', // Asegúrate que esté bien declarado en pubspec.yaml
-              height: 40,
-            ),
-            Spacer(),
-            Stack(
-              children: [
-                Icon(Icons.notifications, color: Colors.white, size: 28),
-                Positioned(
-                  right: 0,
-                  top: 0,
-                  child: Container(
-                    width: 10,
-                    height: 10,
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      shape: BoxShape.circle,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(width: 16),
-            Icon(Icons.account_circle, color: Colors.white, size: 30),
-          ],
-        ),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Sección del título "Estadísticas"
-            Row(
-              children: [
-                Icon(Icons.arrow_back, color: Colors.grey[800]),
-                SizedBox(width: 8),
-                Text(
-                  "Estadísticas",
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue[900],
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
+            Text(
+              "Estadísticas",
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue[900],
+              ),
+            ),            
 
             // Sección de texto informativo
             Text(
@@ -110,8 +69,7 @@ class EstadisticasScreen extends StatelessWidget {
                       subtitle: Align(
                         alignment: Alignment.centerLeft,
                         child: Container(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                           decoration: BoxDecoration(
                             color: isCritico
                                 ? Colors.yellow[100]
@@ -153,14 +111,6 @@ class EstadisticasScreen extends StatelessWidget {
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 2,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.devices), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: ''),
-        ],
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:axo_app/widgets/custom_text_field.dart';
+import 'package:axo_app/services/auth_service.dart';
 
 
 class LoginScreen extends StatelessWidget {
@@ -9,6 +10,7 @@ class LoginScreen extends StatelessWidget {
   final _passwordController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+  final _authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -84,10 +86,6 @@ class LoginScreen extends StatelessWidget {
                           if (value == null || value.isEmpty) {
                             return 'Por favor, ingresa una contraseña';
                           }
-
-                          if (value.length < 8) {
-                            return 'La contraseña debe tener al menos 8 caracteres';
-                          }
                           return null;
                         },
                       ),
@@ -97,9 +95,26 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(height: 20),
 
                 ElevatedButton(
-                  onPressed: (){
+                  onPressed: () async {
                     if(_formKey.currentState!.validate()) {
-                      print("Entradas válidas, luego vemos qué hacemos con esto :D");
+                      bool isAuthenticated = await _authService.login(
+                        _usernameOrEmailController.text,
+                        _passwordController.text,
+                      );
+                      if (isAuthenticated) {
+                        Navigator.pushNamedAndRemoveUntil(
+                          context, 
+                          '/layout', 
+                          (route) => false
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Credenciales incorrectas'),
+                            backgroundColor: Colors.red,
+                          )
+                        );
+                      }
                     }
                   },
                   style: ElevatedButton.styleFrom(

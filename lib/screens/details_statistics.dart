@@ -1,3 +1,4 @@
+import 'package:axo_app/screens/layout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
@@ -5,7 +6,7 @@ class DetailsStatistics extends StatelessWidget {
   final String nombre;
   final String imagen;
 
-  DetailsStatistics({required this.nombre, required this.imagen});
+  const DetailsStatistics({super.key, required this.nombre, required this.imagen});
 
   @override
   Widget build(BuildContext context) {
@@ -13,26 +14,26 @@ class DetailsStatistics extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xFF0A4C92), // Azul oscuro de fondo
+          backgroundColor: const Color(0xFF0A4C92),
           elevation: 0,
           automaticallyImplyLeading: false,
           title: Row(
             children: [
               Image.asset(
-                'assets/axo-logo.png', // Asegúrate que esté bien declarado en pubspec.yaml
+                'assets/axo-logo.png',
                 height: 40,
               ),
-              Spacer(),
+              const Spacer(),
               Stack(
                 children: [
-                  Icon(Icons.notifications, color: Colors.white, size: 28),
+                  const Icon(Icons.notifications, color: Colors.white, size: 28),
                   Positioned(
                     right: 0,
                     top: 0,
                     child: Container(
                       width: 10,
                       height: 10,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.red,
                         shape: BoxShape.circle,
                       ),
@@ -40,26 +41,26 @@ class DetailsStatistics extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(width: 16),
-              Icon(Icons.account_circle, color: Colors.white, size: 30),
+              const SizedBox(width: 16),
+              const Icon(Icons.account_circle, color: Colors.white, size: 30),
             ],
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Sección de título "Estadísticas"
+              // Título con botón de regreso
               Row(
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.pop(context); // Vuelve a la pantalla anterior
+                      Navigator.pop(context);
                     },
                     child: Icon(Icons.arrow_back, color: Colors.grey[800]),
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Text(
                     "Estadísticas",
                     style: TextStyle(
@@ -70,34 +71,37 @@ class DetailsStatistics extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
-              // Info del sistema
+              // Imagen y nombre del sistema
               Row(
                 children: [
                   CircleAvatar(
                     backgroundImage: AssetImage(imagen),
+                    radius: 24,
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 12),
                   Expanded(
                     child: Text(
                       nombre,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 16),
 
               // Resumen histórico + botón
               Row(
                 children: [
-                  Text(
+                  const Text(
                     "Resumen histórico",
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   ElevatedButton.icon(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.teal[300],
@@ -107,33 +111,33 @@ class DetailsStatistics extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {},
-                    icon: Icon(Icons.calendar_today, size: 16),
-                    label: Text("Hoy"),
+                    icon: const Icon(Icons.calendar_today, size: 16),
+                    label: const Text("Hoy"),
                   ),
                 ],
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 12),
 
               // Tabs
-              TabBar(
+              const TabBar(
                 labelColor: Colors.black,
                 unselectedLabelColor: Colors.grey,
                 indicatorColor: Colors.blue,
-                tabs: const [
+                tabs: [
                   Tab(text: "Temperatura"),
                   Tab(text: "Humedad"),
                   Tab(text: "Consumo"),
                 ],
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
 
-              // Contenido de tabs
+              // Contenido por tab
               Expanded(
                 child: TabBarView(
                   children: [
-                    _buildTemperatura(),
-                    _buildHumedad(),
-                    _buildConsumo(),
+                    _buildTabCard("Temperatura interna", "20 ºC", "8 ºC", "30 ºC"),
+                    _buildTabCard("Humedad interna", "80 %", "50 %", "90 %"),
+                    _buildTabCard("Consumo", "80 %", "80 W", "180 W"),
                   ],
                 ),
               ),
@@ -141,18 +145,40 @@ class DetailsStatistics extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: BottomNavigationBar(
-          currentIndex: 2,
+          backgroundColor: const Color(0xFFE4E4E4),
+          selectedItemColor: const Color.fromRGBO(79, 149, 207, 1),
+          unselectedItemColor: const Color.fromRGBO(114, 114, 114, 1),
+          selectedLabelStyle: const TextStyle(
+            fontSize: 14,
+          ),
+          unselectedLabelStyle: const TextStyle(
+            fontSize: 14,
+          ),
+          showUnselectedLabels: true,
+          iconSize: 48,
+          currentIndex: 2, // Estadísticas
+          onTap: (index) {
+            if (index != 2) {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => LayoutScreen(initialIndex: index),
+                ),
+              );
+            }
+          },
           items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-            BottomNavigationBarItem(icon: Icon(Icons.devices), label: ''),
-            BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: ''),
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(icon: Icon(Icons.devices), label: 'Dashboard'),
+            BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: 'Estadísticas'),
+            BottomNavigationBarItem(icon: Icon(Icons.person_rounded), label: 'Perfil'),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildTemperatura() {
+  Widget _buildTabCard(String title, String promedio, String min, String max) {
     return Column(
       children: [
         Row(
@@ -161,13 +187,14 @@ class DetailsStatistics extends StatelessWidget {
               child: Card(
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
-                  child: Column(children: const [
-                    Text("Valor promedio",
-                        style: TextStyle(color: Colors.grey)),
-                    Text("20 ºC",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20)),
-                  ]),
+                  child: Column(
+                    children: [
+                      const Text("Valor promedio", style: TextStyle(color: Colors.grey)),
+                      Text(promedio,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20)),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -175,127 +202,27 @@ class DetailsStatistics extends StatelessWidget {
               child: Card(
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
-                  child: Column(children: const [
-                    Text("Mínimo", style: TextStyle(color: Colors.grey)),
-                    Text("8 ºC"),
-                    SizedBox(height: 8),
-                    Text("Máximo", style: TextStyle(color: Colors.grey)),
-                    Text("30 ºC"),
-                  ]),
+                  child: Column(
+                    children: [
+                      const Text("Mínimo", style: TextStyle(color: Colors.grey)),
+                      Text(min),
+                      const SizedBox(height: 8),
+                      const Text("Máximo", style: TextStyle(color: Colors.grey)),
+                      Text(max),
+                    ],
+                  ),
                 ),
               ),
             ),
           ],
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Card(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                Text("Temperatura interna", style: TextStyle(fontSize: 14)),
-                SizedBox(height: 200, child: _buildLineChart()),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildHumedad() {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Expanded(
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(children: const [
-                    Text("Valor promedio",
-                        style: TextStyle(color: Colors.grey)),
-                    Text("80 %",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20)),
-                  ]),
-                ),
-              ),
-            ),
-            Expanded(
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(children: const [
-                    Text("Mínimo", style: TextStyle(color: Colors.grey)),
-                    Text("50 %"),
-                    SizedBox(height: 8),
-                    Text("Máximo", style: TextStyle(color: Colors.grey)),
-                    Text("90 %"),
-                  ]),
-                ),
-              ),
-            ),
-          ],
-        ),
-        SizedBox(height: 20),
-        Card(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                Text("Humedad interna", style: TextStyle(fontSize: 14)),
-                SizedBox(height: 200, child: _buildLineChart()),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildConsumo() {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Expanded(
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(children: const [
-                    Text("Valor promedio",
-                        style: TextStyle(color: Colors.grey)),
-                    Text("80 %",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20)),
-                  ]),
-                ),
-              ),
-            ),
-            Expanded(
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(children: const [
-                    Text("Mínimo", style: TextStyle(color: Colors.grey)),
-                    Text("80 W"),
-                    SizedBox(height: 8),
-                    Text("Máximo", style: TextStyle(color: Colors.grey)),
-                    Text("180 W"),
-                  ]),
-                ),
-              ),
-            ),
-          ],
-        ),
-        SizedBox(height: 20),
-        Card(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                Text("Consumo", style: TextStyle(fontSize: 14)),
+                Text(title, style: const TextStyle(fontSize: 14)),
                 SizedBox(height: 200, child: _buildLineChart()),
               ],
             ),

@@ -64,6 +64,7 @@ flutter:
     - assets/Mauricio.png
     - assets/Kirbo.png
     - assets/usuario.png
+    - assets/users.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
