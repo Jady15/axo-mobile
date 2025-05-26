@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:axo_app/screens/home_screen.dart';
 import 'package:axo_app/screens/statistics_screen.dart';
-
+import 'package:axo_app/screens/dashboard_screen.dart';
 // Clase para definir la configuración de cada pestaña (sin Navigator)
 class NavigationTab {
   final Widget screen;
@@ -41,7 +41,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
       icon: Icons.home,
     ),
     NavigationTab(
-      screen: Center(child: Text('Dashboard', style: TextStyle(fontSize: 40))),
+      screen: DashboardScreen(),
       label: 'Dashboard',
       icon: Icons.devices,
     ),
