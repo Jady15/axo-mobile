@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:axo_app/screens/home_screen.dart';
 import 'package:axo_app/screens/statistics_screen.dart';
 
 // Clase para definir la configuración de cada pestaña (sin Navigator)
@@ -35,7 +36,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
   // Lista de pestañas simplificada
   static final List<NavigationTab> _tabs = [
     NavigationTab(
-      screen: Center(child: Text('Inicio', style: TextStyle(fontSize: 40))),
+      screen: HomeScreen(),
       label: 'Home',
       icon: Icons.home,
     ),
