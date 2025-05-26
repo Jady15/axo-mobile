@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:axo_app/screens/home_screen.dart';
 import 'package:axo_app/screens/statistics_screen.dart';
 import 'package:axo_app/screens/dashboard_screen.dart';
-// Clase para definir la configuración de cada pestaña (sin Navigator)
+import 'package:axo_app/screens/profile_screen.dart';
+
 class NavigationTab {
   final Widget screen;
   final String label;
   final IconData icon;
+
 
   const NavigationTab({
     required this.screen,
@@ -51,10 +53,12 @@ class _LayoutScreenState extends State<LayoutScreen> {
       icon: Icons.bar_chart,
     ),
     NavigationTab(
-      screen: Center(child: Text('Perfil', style: TextStyle(fontSize: 40))),
+      screen: ProfileScreen(), 
       label: 'Perfil',
       icon: Icons.person_rounded,
     ),
+
+
   ];
 
   @override
@@ -89,8 +93,15 @@ class _LayoutScreenState extends State<LayoutScreen> {
               ],
             ),
             const SizedBox(width: 16),
-            const Icon(Icons.account_circle, color: Colors.white, size: 40),
-          ],
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                _selectedIndex = 3; 
+              });
+            },
+            child: const Icon(Icons.account_circle, color: Colors.white, size: 40),
+          ),
+                    ],
         ),
       ),
       body: IndexedStack(

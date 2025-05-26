@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:axo_app/screens/login_screen.dart';
 import 'package:axo_app/screens/register_screen.dart';
 import 'package:axo_app/screens/welcome_screen.dart';
+import 'package:axo_app/screens/profile_screen.dart';
+import 'package:axo_app/screens/edit_profile_screen.dart';
+
+
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +15,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,6 +25,9 @@ class MyApp extends StatelessWidget {
         '/register': (context) => RegisterScreen(),
         '/login': (context) => LoginScreen(),
         '/layout': (context) => const LayoutScreen(),
+        '/profile': (context) => const ProfileScreen(),
+        '/edit_profile': (context) => const EditProfileScreen(),
+
       },
       title: 'AXO',
     );
